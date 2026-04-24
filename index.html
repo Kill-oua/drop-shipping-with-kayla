@@ -11,7 +11,6 @@
   .tier-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
   .tier-card.featured { border: 2px solid #AFA9EC; }
   .badge { display: inline-block; background: #CECBF6; color: #3C3489; font-size: 11px; padding: 2px 10px; border-radius: var(--border-radius-md); font-weight: 500; margin-bottom: 8px; }
-  .badge-warn { background: #FAEEDA; color: #633806; }
   .num-circle { min-width: 26px; height: 26px; border-radius: 50%; background: #EEEDFE; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #534AB7; font-weight: 500; }
   .clause { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
   .sig-box { border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 12px; background: var(--color-background-primary); }
@@ -103,10 +102,12 @@ DM me to get started! 📩</div>
   <div id="tab-order" class="tab-panel">
     <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Share this with customers to collect their order details.</p>
 
-    <form id="order-form" name="order-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="order-form" />
+    <form id="order-form">
+      <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
       <input type="hidden" name="subject" value="New order received" />
-      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+      <input type="hidden" name="from_name" value="My Shop - Order Form" />
+      <input type="checkbox" name="botcheck" style="display: none;" />
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 16px;">
         <div class="field-group">
@@ -155,30 +156,26 @@ DM me to get started! 📩</div>
 
   <!-- AGREEMENT TAB -->
   <div id="tab-agreement" class="tab-panel">
-    <form id="agreement-form" name="customer-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="customer-agreement" />
-      
-      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+    <form id="agreement-form">
+      <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <input type="hidden" name="subject" value="New customer agreement signed" />
+      <input type="hidden" name="from_name" value="My Shop - Agreement Form" />
+      <input type="checkbox" name="botcheck" style="display: none;" />
 
       <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Customer reads and signs below before any order is placed.</p>
 
       <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">1. Third-party service</strong>We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.</div>
-
       <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">2. Payment & fees</strong>You are required to pay the full item cost upfront before any order is placed. Our service fee (flat rate + 10% of order total) is separate and is charged for our time, card use, tracking, and delivery. A customs/clearance fee may be communicated once the item arrives in Jamaica — you will be informed before this is due.</div>
-
       <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">3. Ordering on your behalf</strong>We will verify your item details, size, colour, quantity, and delivery address before purchasing. Once the order is confirmed and placed, changes may not be possible. It is your responsibility to provide accurate information.</div>
-
       <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">4. Tracking & updates</strong>We will monitor your order and provide updates at key stages. However, we are dependent on the information provided by the seller and shipping company. Delays in updates from those parties are outside our control.</div>
-
       <div class="clause" style="border-left: 3px solid #E24B4A; border-radius: 0;"><strong style="font-size: 12px; color: #A32D2D; display: block; margin-bottom: 4px;">5. Liability disclaimer — please read carefully</strong>Once your item has been dispatched by the seller and is in the hands of the shipping or courier company, it is outside our physical control. We are not responsible for items that are lost, damaged, delayed, seized by customs, or tampered with during international or local shipping. We will make every reasonable effort to investigate and assist in resolving any issues, but we cannot guarantee outcomes that are beyond our control as a third-party service. All orders are placed at the customer's own risk.</div>
-
       <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">6. Dispute resolution</strong>In the event of a missing or damaged item, we will contact the seller and/or shipping company on your behalf and provide you with all tracking and correspondence information. We will do our best to resolve the matter, but final outcomes depend on the policies of those third parties.</div>
-
       <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">7. Agreement</strong>By signing below, you confirm that you have read, understood, and agreed to these terms and conditions. You understand that this is a third-party service and that you are ordering at your own risk.</div>
 
       <div class="field-group">
         <p class="field-label">Your full name</p>
-        <input type="text" id="sig-name" name="full-name" placeholder="Type your full name" />
+        <input type="text" id="sig-name" name="full-name" placeholder="Type your full name" required />
       </div>
       <div class="field-group">
         <p class="field-label">Your email</p>
@@ -231,49 +228,49 @@ DM me to get started! 📩</div>
     });
   }
 
-  // --- ORDER FORM SUBMIT ---
-  const orderForm = document.getElementById('order-form');
-  orderForm.addEventListener('submit', async (e) => {
+  // --- ORDER FORM (Web3Forms) ---
+  document.getElementById('order-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = orderForm.querySelector('[name="full-name"]').value.trim();
+    const form = e.target;
+    const name = form.querySelector('[name="full-name"]').value.trim();
     if (!name) { alert('Please enter your full name.'); return; }
-
+    const btn = document.getElementById('order-submit-btn');
+    btn.textContent = 'Sending...'; btn.disabled = true;
     try {
-      const body = new URLSearchParams(new FormData(orderForm)).toString();
-      const res = await fetch('/', {
+      const obj = Object.fromEntries(new FormData(form));
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(obj)
       });
-      if (!res.ok) throw new Error('Submit failed: ' + res.status);
-      orderForm.style.display = 'none';
-      const conf = document.getElementById('order-confirmed-msg');
-      conf.style.display = 'block';
-      document.getElementById('order-confirmed-name').textContent = 'Order received for ' + name + '. We\'ll be in touch soon!';
+      const json = await res.json();
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('order-confirmed-msg').style.display = 'block';
+        document.getElementById('order-confirmed-name').textContent = 'Order received for ' + name + '. We\'ll be in touch soon!';
+      } else { throw new Error(json.message || 'Submit failed'); }
     } catch (err) {
       alert('Could not submit the order. Please try again.\n' + err.message);
+      btn.textContent = 'Submit order'; btn.disabled = false;
     }
   });
 
   // --- SIGNATURE CANVAS ---
   const canvas = document.getElementById('sig-canvas');
   const ctx = canvas.getContext('2d');
-  let drawing = false;
-  let hasSig = false;
+  let drawing = false, hasSig = false;
 
   function getPos(e) {
     const r = canvas.getBoundingClientRect();
     const src = e.touches ? e.touches[0] : e;
     return { x: src.clientX - r.left, y: src.clientY - r.top };
   }
-
   canvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
   canvas.addEventListener('mousemove', e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.strokeStyle = '#3C3489'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.stroke(); hasSig = true; });
   canvas.addEventListener('mouseup', () => drawing = false);
   canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
   canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.strokeStyle = '#3C3489'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.stroke(); hasSig = true; });
   canvas.addEventListener('touchend', () => drawing = false);
-
   function clearSig() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSig = false; }
 
   const dateInput = document.getElementById('sig-date');
@@ -283,60 +280,49 @@ DM me to get started! 📩</div>
     ['1. Third-party service', 'We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.'],
     ['2. Payment & fees', 'Full item cost is required upfront before any order is placed. Service fee (flat rate + 10% of order total) is separate. A customs/clearance fee may be communicated once the item arrives in Jamaica.'],
     ['3. Ordering on your behalf', 'We verify item details, size, colour, quantity, and delivery address before purchasing. Once the order is placed, changes may not be possible.'],
-    ['4. Tracking & updates', 'We monitor the order and provide updates at key stages. Delays in updates from sellers or shipping companies are outside our control.'],
-    ['5. Liability disclaimer', 'Once the item is with the shipping or courier company, it is outside our physical control. We are not responsible for items lost, damaged, delayed, seized, or tampered with during shipping. All orders are placed at the customer\'s own risk.'],
+    ['4. Tracking & updates', 'We monitor the order and provide updates at key stages. Delays from sellers or shipping companies are outside our control.'],
+    ['5. Liability disclaimer', 'Once the item is with the shipping or courier company, it is outside our physical control. We are not responsible for items lost, damaged, delayed, seized, or tampered with during shipping. All orders are at the customer\'s own risk.'],
     ['6. Dispute resolution', 'For missing or damaged items, we will contact the seller and/or shipping company on your behalf. Final outcomes depend on third-party policies.'],
     ['7. Agreement', 'By signing, the customer confirms they have read, understood, and agreed to these terms and are ordering at their own risk.']
   ];
 
   function buildReadableSummary(name, email, date) {
-    const lines = [];
-    lines.push('CUSTOMER AGREEMENT — SIGNED');
-    lines.push('='.repeat(40));
-    lines.push('');
-    lines.push('Full name: ' + name);
+    const lines = ['CUSTOMER AGREEMENT — SIGNED', '='.repeat(40), '', 'Full name: ' + name];
     if (email) lines.push('Email: ' + email);
-    lines.push('Date signed: ' + date);
-    lines.push('');
-    lines.push('TERMS ACCEPTED:');
-    lines.push('-'.repeat(40));
-    AGREEMENT_CLAUSES.forEach(([title, body]) => {
-      lines.push('');
-      lines.push(title);
-      lines.push(body);
-    });
-    lines.push('');
-    lines.push('-'.repeat(40));
-    lines.push('Signature captured as image (attached in the submission).');
+    lines.push('Date signed: ' + date, '', 'TERMS ACCEPTED:', '-'.repeat(40));
+    AGREEMENT_CLAUSES.forEach(([title, body]) => lines.push('', title, body));
+    lines.push('', '-'.repeat(40), 'Signature captured as image.');
     return lines.join('\n');
   }
 
-  const agreementForm = document.getElementById('agreement-form');
-  agreementForm.addEventListener('submit', async (e) => {
+  // --- AGREEMENT FORM (Web3Forms) ---
+  document.getElementById('agreement-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+    const form = e.target;
     const name = document.getElementById('sig-name').value.trim();
     const email = document.getElementById('sig-email').value.trim();
     if (!name) { alert('Please enter your full name.'); return; }
     if (!hasSig) { alert('Please draw your signature.'); return; }
-
-    const signatureDataUrl = canvas.toDataURL('image/png');
-    document.getElementById('sig-image').value = signatureDataUrl;
+    const submitBtn = form.querySelector('[type="submit"]');
+    submitBtn.textContent = 'Sending...'; submitBtn.disabled = true;
+    document.getElementById('sig-image').value = canvas.toDataURL('image/png');
     document.getElementById('agreement-summary').value = buildReadableSummary(name, email, dateInput.value);
-
     try {
-      const body = new URLSearchParams(new FormData(agreementForm)).toString();
-      const res = await fetch('/', {
+      const obj = Object.fromEntries(new FormData(form));
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(obj)
       });
-      if (!res.ok) throw new Error('Submit failed: ' + res.status);
-      agreementForm.style.display = 'none';
-      const conf = document.getElementById('confirmed-msg');
-      conf.style.display = 'block';
-      document.getElementById('confirmed-name').textContent = name + ' agreed on ' + dateInput.value;
+      const json = await res.json();
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('confirmed-msg').style.display = 'block';
+        document.getElementById('confirmed-name').textContent = name + ' agreed on ' + dateInput.value;
+      } else { throw new Error(json.message || 'Submit failed'); }
     } catch (err) {
       alert('Could not submit the agreement. Please try again.\n' + err.message);
+      submitBtn.textContent = 'Confirm & sign agreement'; submitBtn.disabled = false;
     }
   });
 </script>
