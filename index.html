@@ -1,0 +1,342 @@
+<h2 class="sr-only">Drop shipping service kit: pricing, order form, WhatsApp message, and customer agreement</h2>
+<style>
+  .tab-btn { background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 8px 16px; font-size: 13px; cursor: pointer; color: var(--color-text-secondary); }
+  .tab-btn.active { background: #EEEDFE; border-color: #AFA9EC; color: #3C3489; font-weight: 500; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .field-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
+  .field-group { margin-bottom: 14px; }
+  input[type=text], input[type=tel], input[type=email], textarea, select { width: 100%; box-sizing: border-box; }
+  textarea { resize: vertical; min-height: 70px; }
+  .tier-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+  .tier-card.featured { border: 2px solid #AFA9EC; }
+  .badge { display: inline-block; background: #CECBF6; color: #3C3489; font-size: 11px; padding: 2px 10px; border-radius: var(--border-radius-md); font-weight: 500; margin-bottom: 8px; }
+  .badge-warn { background: #FAEEDA; color: #633806; }
+  .num-circle { min-width: 26px; height: 26px; border-radius: 50%; background: #EEEDFE; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #534AB7; font-weight: 500; }
+  .clause { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
+  .sig-box { border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 12px; background: var(--color-background-primary); }
+  canvas { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); cursor: crosshair; display: block; }
+  .confirmed { background: #E1F5EE; border-radius: var(--border-radius-lg); padding: 1.5rem; text-align: center; display: none; }
+</style>
+
+<div style="padding: 1rem 0;">
+
+  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+    <button class="tab-btn active" onclick="switchTab('pricing')">Pricing</button>
+    <button class="tab-btn" onclick="switchTab('whatsapp')">WhatsApp message</button>
+    <button class="tab-btn" onclick="switchTab('order')">Order form</button>
+    <button class="tab-btn" onclick="switchTab('agreement')">Customer agreement</button>
+  </div>
+
+  <!-- PRICING TAB -->
+  <div id="tab-pricing" class="tab-panel active">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">All fees are in JMD. Client pays item cost upfront before ordering begins.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 1rem;">
+      <div class="tier-card">
+        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">Under $5,000 JMD</p>
+        <p style="margin: 0; font-size: 22px; font-weight: 500; color: var(--color-text-primary);">$500 <span style="font-size: 12px; font-weight: 400;">JMD</span></p>
+        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+      </div>
+      <div class="tier-card featured">
+        <div class="badge">Most common</div>
+        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">$5,001 – $10,000 JMD</p>
+        <p style="margin: 0; font-size: 22px; font-weight: 500; color: var(--color-text-primary);">$1,000 <span style="font-size: 12px; font-weight: 400;">JMD</span></p>
+        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+      </div>
+      <div class="tier-card">
+        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">$10,001 – $15,000 JMD</p>
+        <p style="margin: 0; font-size: 22px; font-weight: 500; color: var(--color-text-primary);">$1,500 <span style="font-size: 12px; font-weight: 400;">JMD</span></p>
+        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+      </div>
+      <div class="tier-card">
+        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">Over $15,000 JMD</p>
+        <p style="margin: 0; font-size: 18px; font-weight: 500; color: var(--color-text-primary);">Quoted on request</p>
+        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+      </div>
+    </div>
+    <div style="background: #FAEEDA; border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem;">
+      <p style="margin: 0 0 4px; font-size: 13px; font-weight: 500; color: #633806;">Clearance fee</p>
+      <p style="margin: 0; font-size: 13px; color: #854F0B; line-height: 1.6;">An additional customs/clearance fee may apply once your item arrives in Jamaica. You will be notified of the exact amount at that time before any payment is required.</p>
+    </div>
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
+      <p style="margin: 0 0 12px; font-size: 14px; font-weight: 500; color: var(--color-text-primary);">What your fee covers</p>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">1</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Ordering the item using my card on your behalf</p></div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">2</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Tracking your order and keeping you updated at every stage</p></div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">3</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Verifying item details, size, address, and seller before purchase</p></div>
+        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">4</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Delivering to a convenient location for both of us</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP TAB -->
+  <div id="tab-whatsapp" class="tab-panel">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Copy and send this to potential customers on WhatsApp or social media.</p>
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; font-size: 13px; line-height: 1.8; color: var(--color-text-primary); white-space: pre-wrap;" id="wa-text">🛍️ *PERSONAL SHOPPING & DELIVERY SERVICE*
+
+Can't shop online? No card? Too busy? — I got you! 💪
+
+I am a third-party personal shopping service. You tell me what you want, I buy it, track it, and deliver it straight to you.
+
+💰 *Service Fees (JMD):*
+• Under $5,000 → $500 fee
+• $5,001 – $10,000 → $1,000 fee
+• $10,001 – $15,000 → $1,500 fee
+• Over $15,000 → Fee quoted on request
+• + 10% on all orders
+
+📦 *What I do for you:*
+✅ Order your item with my card
+✅ Verify details, size & seller before buying
+✅ Track it & update you every step of the way
+✅ Deliver to a location that works for us both
+
+⚠️ Note: A clearance fee may apply when your item arrives in Jamaica. You will be informed of this in advance.
+
+📋 All customers must read and agree to our terms before ordering.
+
+DM me to get started! 📩</div>
+    <button onclick="copyWA()" style="font-size: 13px; padding: 8px 16px; border-radius: var(--border-radius-md);" id="copy-btn">Copy message</button>
+  </div>
+
+  <!-- ORDER FORM TAB -->
+  <div id="tab-order" class="tab-panel">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Share this with customers to collect their order details.</p>
+
+    <form id="order-form" name="order-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="order-form" />
+      <input type="hidden" name="subject" value="New order received" />
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 16px;">
+        <div class="field-group">
+          <p class="field-label">Full name</p>
+          <input type="text" name="full-name" placeholder="Customer's full name" required />
+        </div>
+        <div class="field-group">
+          <p class="field-label">Phone number</p>
+          <input type="tel" name="phone" placeholder="e.g. 876-XXX-XXXX" required />
+        </div>
+      </div>
+      <div class="field-group">
+        <p class="field-label">Item name / description</p>
+        <input type="text" name="item-description" placeholder="e.g. Nike Air Force 1 size 10, white" required />
+      </div>
+      <div class="field-group">
+        <p class="field-label">Link to item (if you have one)</p>
+        <input type="text" name="item-link" placeholder="Paste product URL here" />
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 16px;">
+        <div class="field-group">
+          <p class="field-label">Estimated item cost (JMD)</p>
+          <input type="text" name="item-cost" placeholder="e.g. $8,000 JMD" required />
+        </div>
+        <div class="field-group">
+          <p class="field-label">Delivery location / area</p>
+          <input type="text" name="delivery-location" placeholder="e.g. Sam Sharpe Square etc..." required />
+        </div>
+      </div>
+      <div class="field-group">
+        <p class="field-label">Any special notes or instructions?</p>
+        <textarea name="special-notes" placeholder="Size, colour, quantity, anything important..."></textarea>
+      </div>
+      <div style="background: #FAEEDA; border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 14px; font-size: 12px; color: #854F0B; line-height: 1.6;">
+        By submitting this order, you confirm you have read and agreed to the customer terms & conditions.
+      </div>
+      <button type="submit" id="order-submit-btn" style="font-size: 13px; padding: 8px 16px; border-radius: var(--border-radius-md);">Submit order</button>
+    </form>
+
+    <div class="confirmed" id="order-confirmed-msg">
+      <div style="width: 48px; height: 48px; border-radius: 50%; background: #9FE1CB; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 22px;">✓</div>
+      <p style="margin: 0 0 4px; font-size: 16px; font-weight: 500; color: #085041;">Order submitted!</p>
+      <p style="margin: 0; font-size: 13px; color: #0F6E56;" id="order-confirmed-name"></p>
+    </div>
+  </div>
+
+  <!-- AGREEMENT TAB -->
+  <div id="tab-agreement" class="tab-panel">
+    <form id="agreement-form" name="customer-agreement" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="customer-agreement" />
+      
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Customer reads and signs below before any order is placed.</p>
+
+      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">1. Third-party service</strong>We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.</div>
+
+      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">2. Payment & fees</strong>You are required to pay the full item cost upfront before any order is placed. Our service fee (flat rate + 10% of order total) is separate and is charged for our time, card use, tracking, and delivery. A customs/clearance fee may be communicated once the item arrives in Jamaica — you will be informed before this is due.</div>
+
+      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">3. Ordering on your behalf</strong>We will verify your item details, size, colour, quantity, and delivery address before purchasing. Once the order is confirmed and placed, changes may not be possible. It is your responsibility to provide accurate information.</div>
+
+      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">4. Tracking & updates</strong>We will monitor your order and provide updates at key stages. However, we are dependent on the information provided by the seller and shipping company. Delays in updates from those parties are outside our control.</div>
+
+      <div class="clause" style="border-left: 3px solid #E24B4A; border-radius: 0;"><strong style="font-size: 12px; color: #A32D2D; display: block; margin-bottom: 4px;">5. Liability disclaimer — please read carefully</strong>Once your item has been dispatched by the seller and is in the hands of the shipping or courier company, it is outside our physical control. We are not responsible for items that are lost, damaged, delayed, seized by customs, or tampered with during international or local shipping. We will make every reasonable effort to investigate and assist in resolving any issues, but we cannot guarantee outcomes that are beyond our control as a third-party service. All orders are placed at the customer's own risk.</div>
+
+      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">6. Dispute resolution</strong>In the event of a missing or damaged item, we will contact the seller and/or shipping company on your behalf and provide you with all tracking and correspondence information. We will do our best to resolve the matter, but final outcomes depend on the policies of those third parties.</div>
+
+      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">7. Agreement</strong>By signing below, you confirm that you have read, understood, and agreed to these terms and conditions. You understand that this is a third-party service and that you are ordering at your own risk.</div>
+
+      <div class="field-group">
+        <p class="field-label">Your full name</p>
+        <input type="text" id="sig-name" name="full-name" placeholder="Type your full name" />
+      </div>
+      <div class="field-group">
+        <p class="field-label">Your email</p>
+        <input type="email" id="sig-email" name="email" placeholder="you@example.com" />
+      </div>
+      <div class="field-group">
+        <p class="field-label">Draw your signature below</p>
+        <div class="sig-box">
+          <canvas id="sig-canvas" width="580" height="100"></canvas>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+            <span style="font-size: 11px; color: var(--color-text-tertiary);">Draw with finger or mouse</span>
+            <button type="button" onclick="clearSig()" style="font-size: 11px; padding: 4px 10px; border-radius: var(--border-radius-md);">Clear</button>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <p class="field-label">Date</p>
+        <input type="text" id="sig-date" name="date" readonly />
+      </div>
+
+      <input type="hidden" name="signature-image" id="sig-image" />
+      <textarea name="agreement-summary" id="agreement-summary" hidden></textarea>
+
+      <button type="submit" style="font-size: 13px; padding: 10px 20px; border-radius: var(--border-radius-md); width: 100%;">Confirm & sign agreement</button>
+    </form>
+
+    <div class="confirmed" id="confirmed-msg">
+      <div style="width: 48px; height: 48px; border-radius: 50%; background: #9FE1CB; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 22px;">✓</div>
+      <p style="margin: 0 0 4px; font-size: 16px; font-weight: 500; color: #085041;">Agreement signed</p>
+      <p style="margin: 0; font-size: 13px; color: #0F6E56;" id="confirmed-name"></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function copyWA() {
+    const text = document.getElementById('wa-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy message', 2000);
+    });
+  }
+
+  // --- ORDER FORM SUBMIT ---
+  const orderForm = document.getElementById('order-form');
+  orderForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = orderForm.querySelector('[name="full-name"]').value.trim();
+    if (!name) { alert('Please enter your full name.'); return; }
+
+    try {
+      const body = new URLSearchParams(new FormData(orderForm)).toString();
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      if (!res.ok) throw new Error('Submit failed: ' + res.status);
+      orderForm.style.display = 'none';
+      const conf = document.getElementById('order-confirmed-msg');
+      conf.style.display = 'block';
+      document.getElementById('order-confirmed-name').textContent = 'Order received for ' + name + '. We\'ll be in touch soon!';
+    } catch (err) {
+      alert('Could not submit the order. Please try again.\n' + err.message);
+    }
+  });
+
+  // --- SIGNATURE CANVAS ---
+  const canvas = document.getElementById('sig-canvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  let hasSig = false;
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - r.left, y: src.clientY - r.top };
+  }
+
+  canvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('mousemove', e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.strokeStyle = '#3C3489'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.stroke(); hasSig = true; });
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.strokeStyle = '#3C3489'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.stroke(); hasSig = true; });
+  canvas.addEventListener('touchend', () => drawing = false);
+
+  function clearSig() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSig = false; }
+
+  const dateInput = document.getElementById('sig-date');
+  if (dateInput) dateInput.value = new Date().toLocaleDateString('en-JM', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  const AGREEMENT_CLAUSES = [
+    ['1. Third-party service', 'We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.'],
+    ['2. Payment & fees', 'Full item cost is required upfront before any order is placed. Service fee (flat rate + 10% of order total) is separate. A customs/clearance fee may be communicated once the item arrives in Jamaica.'],
+    ['3. Ordering on your behalf', 'We verify item details, size, colour, quantity, and delivery address before purchasing. Once the order is placed, changes may not be possible.'],
+    ['4. Tracking & updates', 'We monitor the order and provide updates at key stages. Delays in updates from sellers or shipping companies are outside our control.'],
+    ['5. Liability disclaimer', 'Once the item is with the shipping or courier company, it is outside our physical control. We are not responsible for items lost, damaged, delayed, seized, or tampered with during shipping. All orders are placed at the customer\'s own risk.'],
+    ['6. Dispute resolution', 'For missing or damaged items, we will contact the seller and/or shipping company on your behalf. Final outcomes depend on third-party policies.'],
+    ['7. Agreement', 'By signing, the customer confirms they have read, understood, and agreed to these terms and are ordering at their own risk.']
+  ];
+
+  function buildReadableSummary(name, email, date) {
+    const lines = [];
+    lines.push('CUSTOMER AGREEMENT — SIGNED');
+    lines.push('='.repeat(40));
+    lines.push('');
+    lines.push('Full name: ' + name);
+    if (email) lines.push('Email: ' + email);
+    lines.push('Date signed: ' + date);
+    lines.push('');
+    lines.push('TERMS ACCEPTED:');
+    lines.push('-'.repeat(40));
+    AGREEMENT_CLAUSES.forEach(([title, body]) => {
+      lines.push('');
+      lines.push(title);
+      lines.push(body);
+    });
+    lines.push('');
+    lines.push('-'.repeat(40));
+    lines.push('Signature captured as image (attached in the submission).');
+    return lines.join('\n');
+  }
+
+  const agreementForm = document.getElementById('agreement-form');
+  agreementForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('sig-name').value.trim();
+    const email = document.getElementById('sig-email').value.trim();
+    if (!name) { alert('Please enter your full name.'); return; }
+    if (!hasSig) { alert('Please draw your signature.'); return; }
+
+    const signatureDataUrl = canvas.toDataURL('image/png');
+    document.getElementById('sig-image').value = signatureDataUrl;
+    document.getElementById('agreement-summary').value = buildReadableSummary(name, email, dateInput.value);
+
+    try {
+      const body = new URLSearchParams(new FormData(agreementForm)).toString();
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      if (!res.ok) throw new Error('Submit failed: ' + res.status);
+      agreementForm.style.display = 'none';
+      const conf = document.getElementById('confirmed-msg');
+      conf.style.display = 'block';
+      document.getElementById('confirmed-name').textContent = name + ' agreed on ' + dateInput.value;
+    } catch (err) {
+      alert('Could not submit the agreement. Please try again.\n' + err.message);
+    }
+  });
+</script>
