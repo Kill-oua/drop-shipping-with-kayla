@@ -102,7 +102,7 @@ DM me to get started! 📩</div>
   <div id="tab-order" class="tab-panel">
     <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Share this with customers to collect their order details.</p>
 
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form id="order-form">
       <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
       <input type="hidden" name="access_key" value="16966491-c1a3-4b6f-b74c-a3b84d71564d" />
       <input type="hidden" name="subject" value="New order received" />
@@ -156,7 +156,7 @@ DM me to get started! 📩</div>
 
   <!-- AGREEMENT TAB -->
   <div id="tab-agreement" class="tab-panel">
-   <form action="https://api.web3forms.com/submit" method="POST">
+    <form id="agreement-form">
       <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
       <input type="hidden" name="access_key" value="16966491-c1a3-4b6f-b74c-a3b84d71564d" />
       <input type="hidden" name="subject" value="New customer agreement signed" />
