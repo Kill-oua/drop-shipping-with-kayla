@@ -1,77 +1,261 @@
-<h2 class="sr-only">Drop shipping service kit: pricing, order form, WhatsApp message, and customer agreement</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Personal Shopping · Jamaica</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  .tab-btn { background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 8px 16px; font-size: 13px; cursor: pointer; color: var(--color-text-secondary); }
-  .tab-btn.active { background: #EEEDFE; border-color: #AFA9EC; color: #3C3489; font-weight: 500; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-  .field-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
-  .field-group { margin-bottom: 14px; }
-  input[type=text], input[type=tel], input[type=email], textarea, select { width: 100%; box-sizing: border-box; }
-  textarea { resize: vertical; min-height: 70px; }
-  .tier-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
-  .tier-card.featured { border: 2px solid #AFA9EC; }
-  .badge { display: inline-block; background: #CECBF6; color: #3C3489; font-size: 11px; padding: 2px 10px; border-radius: var(--border-radius-md); font-weight: 500; margin-bottom: 8px; }
-  .num-circle { min-width: 26px; height: 26px; border-radius: 50%; background: #EEEDFE; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #534AB7; font-weight: 500; }
-  .clause { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
-  .sig-box { border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 12px; background: var(--color-background-primary); }
-  canvas { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); cursor: crosshair; display: block; }
-  .confirmed { background: #E1F5EE; border-radius: var(--border-radius-lg); padding: 1.5rem; text-align: center; display: none; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --orange:#C94A00;
+  --orange-mid:#E05A10;
+  --orange-light:#F07030;
+  --hero-bg:#B84000;
+  --hero-dark:#8B2E00;
+  --cream:#FFF8F2;
+  --card-bg:#FFFFFF;
+  --text:#1A0A00;
+  --muted:#6B4030;
+  --border:rgba(180,80,0,0.13);
+  --section-bg:#FFF3EA;
+}
+
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh}
+
+.hero{
+  background:var(--hero-bg);
+  padding:32px 40px 120px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:340px;height:340px;border-radius:50%;
+  background:var(--orange-mid);opacity:0.35;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-80px;left:50%;
+  width:200%;height:140px;
+  background:var(--cream);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  transform:translateX(-50%);
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:100px;padding:6px 14px;
+  font-size:11px;font-weight:500;
+  color:rgba(255,255,255,0.9);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#FFD580;display:block;}
+
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(42px,7vw,72px);
+  font-weight:800;color:#fff;
+  line-height:1.05;letter-spacing:-0.03em;
+  margin-bottom:6px;
+}
+.hero h1 .accent{color:#FFD580;}
+.hero p{color:rgba(255,255,255,0.75);font-size:15px;max-width:420px;margin:16px 0 36px;line-height:1.65;}
+
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2;}
+.tab-btn{
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:10px 22px;border-radius:100px;
+  border:1.5px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.85);
+  cursor:pointer;transition:all 0.18s;
+  display:flex;align-items:center;gap:7px;
+}
+.tab-btn:hover{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.5);}
+.tab-btn.active{background:#fff;color:var(--hero-dark);border-color:#fff;font-weight:500;}
+.tab-btn .icon{font-size:14px;}
+
+.content{max-width:860px;margin:0 auto;padding:0 24px 60px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.section-label{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin:40px 0 20px;
+}
+
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px;}
+.tier-card{
+  background:var(--card-bg);border:1.5px solid var(--border);
+  border-radius:18px;padding:20px 18px 18px;
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.tier-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(180,80,0,0.1);}
+.tier-card.featured{border-color:var(--orange-light);background:#FFF4ED;}
+.tier-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--orange-light);color:#fff;
+  font-size:10px;font-weight:500;
+  letter-spacing:0.07em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;margin-bottom:10px;
+}
+.tier-badge::before{content:'★';font-size:9px;}
+.tier-range{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.tier-price{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(30px,4vw,38px);font-weight:800;
+  color:var(--text);line-height:1;margin-bottom:4px;
+}
+.tier-price .unit{font-size:13px;font-weight:400;color:var(--muted);}
+.tier-percent{font-size:12px;color:var(--orange-mid);font-weight:500;}
+
+.notice{background:#FFF4E0;border:1.5px solid #F5C478;border-radius:14px;padding:16px 18px;margin-bottom:20px;}
+.notice-title{font-size:13px;font-weight:500;color:#7A4A00;margin-bottom:4px;}
+.notice p{font-size:13px;color:#9A6010;line-height:1.6;}
+
+.covers{background:var(--card-bg);border:1.5px solid var(--border);border-radius:18px;padding:22px 24px;}
+.covers-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--text);margin-bottom:18px;}
+.cover-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
+.cover-item:last-child{margin-bottom:0;}
+.cover-num{
+  min-width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  background:var(--section-bg);color:var(--orange-mid);
+  border:1.5px solid rgba(180,80,0,0.12);flex-shrink:0;
+}
+.cover-text{font-size:14px;color:var(--text);padding-top:5px;line-height:1.5;}
+
+.wa-box{
+  background:#E8F9F1;border:1.5px solid #7DCFA8;
+  border-radius:18px;padding:24px;
+  font-size:14px;line-height:1.95;color:#0A4A30;
+  white-space:pre-wrap;margin-bottom:16px;
+}
+.btn-wa{
+  background:#0F6E56;color:#E1F5EE;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  border:none;border-radius:10px;padding:12px 24px;cursor:pointer;
+  transition:opacity 0.15s,transform 0.12s;letter-spacing:0.02em;
+}
+.btn-wa:hover{opacity:0.88;transform:translateY(-1px);}
+
+.form-card{background:var(--card-bg);border:1.5px solid var(--border);border-radius:18px;padding:24px 26px;}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 18px;}
+.field-group{margin-bottom:16px;}
+.field-label{display:block;font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+input[type=text],input[type=tel],input[type=email],textarea{
+  width:100%;background:var(--section-bg);
+  border:1.5px solid rgba(180,80,0,0.15);border-radius:10px;
+  padding:11px 14px;font-family:'DM Sans',sans-serif;
+  font-size:14px;color:var(--text);outline:none;
+  transition:border-color 0.15s,box-shadow 0.15s;
+}
+input:focus,textarea:focus{border-color:var(--orange-light);box-shadow:0 0 0 3px rgba(200,80,0,0.1);background:#fff;}
+textarea{resize:vertical;min-height:80px;}
+input[readonly]{background:var(--section-bg);cursor:default;color:var(--muted);}
+
+.form-notice{background:#FFF4E0;border:1px solid #F5C478;border-radius:10px;padding:11px 14px;margin-bottom:16px;font-size:13px;color:#7A4A00;line-height:1.6;}
+
+.btn-primary{
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:800;
+  letter-spacing:0.02em;border:none;border-radius:12px;
+  padding:13px 28px;cursor:pointer;
+  transition:opacity 0.15s,transform 0.12s;
+  background:var(--orange-mid);color:#fff;
+}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-primary.full{width:100%;text-align:center;}
+.btn-primary.blue{background:#185FA5;}
+
+.btn-ghost{font-family:'DM Sans',sans-serif;font-size:12px;background:transparent;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;cursor:pointer;color:var(--muted);transition:background 0.15s;}
+.btn-ghost:hover{background:var(--section-bg);}
+
+.divider{border:none;border-top:1.5px solid var(--border);margin:24px 0;}
+
+.clause{border-radius:12px;padding:14px 16px;margin-bottom:8px;font-size:14px;line-height:1.65;}
+.clause-title{display:block;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;margin-bottom:5px;}
+.cl-orange{background:#FFF0E6;color:#7A3000;} .cl-orange .clause-title{color:var(--orange-mid);}
+.cl-teal{background:#E8F9F1;color:#0A4A30;} .cl-teal .clause-title{color:#0F6E56;}
+.cl-blue{background:#EAF2FB;color:#0C3A6A;} .cl-blue .clause-title{color:#185FA5;}
+.cl-amber{background:#FFF8E0;color:#5A3800;} .cl-amber .clause-title{color:#9A6010;}
+.cl-red{background:#FFF0F0;border-left:3px solid #E24B4A;border-radius:0 12px 12px 0;color:#4A1010;} .cl-red .clause-title{color:#A32D2D;}
+.cl-cream{background:#F9F4EE;color:#4A2800;} .cl-cream .clause-title{color:var(--muted);}
+
+canvas#sig-canvas{border:1.5px solid var(--border);border-radius:10px;cursor:crosshair;display:block;width:100%;background:#fff;}
+
+.confirmed{display:none;background:#E8F9F1;border:1.5px solid #7DCFA8;border-radius:18px;padding:36px;text-align:center;}
+.check-circle{width:54px;height:54px;border-radius:50%;background:#9FE1CB;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;color:#085041;}
+.confirmed h3{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:#085041;margin-bottom:6px;}
+.confirmed p{color:#0F6E56;font-size:14px;}
+
+footer{text-align:center;padding:28px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
 </style>
+</head>
+<body>
 
-<div style="padding: 1rem 0;">
+<div class="hero">
+  <div class="hero-badge">Personal Shopping · Jamaica</div>
+  <h1>We shop it.<br><span class="accent">You receive it.</span> 🛍️</h1>
+  <p>No card? No problem. Tell us what you want — we buy it, track it, and get it to you across Jamaica.</p>
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="pricing" onclick="switchTab(this)"><span class="icon">💰</span> Pricing</button>
+    <button class="tab-btn" data-tab="whatsapp" onclick="switchTab(this)"><span class="icon">💬</span> WhatsApp</button>
+    <button class="tab-btn" data-tab="order" onclick="switchTab(this)"><span class="icon">📦</span> Order form</button>
+    <button class="tab-btn" data-tab="agreement" onclick="switchTab(this)"><span class="icon">📋</span> Agreement</button>
+  </nav>
+</div>
 
-  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
-    <button class="tab-btn active" onclick="switchTab('pricing')">Pricing</button>
-    <button class="tab-btn" onclick="switchTab('whatsapp')">WhatsApp message</button>
-    <button class="tab-btn" onclick="switchTab('order')">Order form</button>
-    <button class="tab-btn" onclick="switchTab('agreement')">Customer agreement</button>
-  </div>
+<div class="content">
 
-  <!-- PRICING TAB -->
   <div id="tab-pricing" class="tab-panel active">
-    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">All fees are in JMD. Client pays item cost upfront before ordering begins.</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 1rem;">
+    <p class="section-label">Service fees — all prices in JMD</p>
+    <div class="tier-grid">
       <div class="tier-card">
-        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">Under $5,000 JMD</p>
-        <p style="margin: 0; font-size: 22px; font-weight: 500; color: var(--color-text-primary);">$500 <span style="font-size: 12px; font-weight: 400;">JMD</span></p>
-        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+        <p class="tier-range">Under $5,000</p>
+        <p class="tier-price">$500 <span class="unit">JMD</span></p>
+        <p class="tier-percent">+ 10% of total</p>
       </div>
       <div class="tier-card featured">
-        <div class="badge">Most common</div>
-        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">$5,001 – $10,000 JMD</p>
-        <p style="margin: 0; font-size: 22px; font-weight: 500; color: var(--color-text-primary);">$1,000 <span style="font-size: 12px; font-weight: 400;">JMD</span></p>
-        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+        <div class="tier-badge">Most common</div>
+        <p class="tier-range">$5,001 – $10,000</p>
+        <p class="tier-price">$1,000 <span class="unit">JMD</span></p>
+        <p class="tier-percent">+ 10% of total</p>
       </div>
       <div class="tier-card">
-        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">$10,001 – $15,000 JMD</p>
-        <p style="margin: 0; font-size: 22px; font-weight: 500; color: var(--color-text-primary);">$1,500 <span style="font-size: 12px; font-weight: 400;">JMD</span></p>
-        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+        <p class="tier-range">$10,001 – $15,000</p>
+        <p class="tier-price">$1,500 <span class="unit">JMD</span></p>
+        <p class="tier-percent">+ 10% of total</p>
       </div>
       <div class="tier-card">
-        <p style="margin: 0 0 6px; font-size: 12px; color: var(--color-text-secondary);">Over $15,000 JMD</p>
-        <p style="margin: 0; font-size: 18px; font-weight: 500; color: var(--color-text-primary);">Quoted on request</p>
-        <p style="margin: 4px 0 0; font-size: 11px; color: var(--color-text-secondary);">+ 10% of order total</p>
+        <p class="tier-range">Over $15,000</p>
+        <p class="tier-price" style="font-size:22px;padding-top:6px;">Quoted<br>on request</p>
+        <p class="tier-percent">+ 10% of total</p>
       </div>
     </div>
-    <div style="background: #FAEEDA; border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem;">
-      <p style="margin: 0 0 4px; font-size: 13px; font-weight: 500; color: #633806;">Clearance fee</p>
-      <p style="margin: 0; font-size: 13px; color: #854F0B; line-height: 1.6;">An additional customs/clearance fee may apply once your item arrives in Jamaica. You will be notified of the exact amount at that time before any payment is required.</p>
+    <div class="notice">
+      <p class="notice-title">Clearance fee</p>
+      <p>An additional customs/clearance fee may apply once your item arrives in Jamaica. You will be notified of the exact amount before any payment is required.</p>
     </div>
-    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
-      <p style="margin: 0 0 12px; font-size: 14px; font-weight: 500; color: var(--color-text-primary);">What your fee covers</p>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">1</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Ordering the item using my card on your behalf</p></div>
-        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">2</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Tracking your order and keeping you updated at every stage</p></div>
-        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">3</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Verifying item details, size, address, and seller before purchase</p></div>
-        <div style="display: flex; gap: 10px; align-items: flex-start;"><div class="num-circle">4</div><p style="margin: 0; font-size: 13px; color: var(--color-text-primary); padding-top: 4px; line-height: 1.5;">Delivering to a convenient location for both of us</p></div>
-      </div>
+    <div class="covers">
+      <p class="covers-title">What your fee covers</p>
+      <div class="cover-item"><div class="cover-num">1</div><p class="cover-text">Ordering the item using my card on your behalf</p></div>
+      <div class="cover-item"><div class="cover-num">2</div><p class="cover-text">Tracking your order and keeping you updated at every stage</p></div>
+      <div class="cover-item"><div class="cover-num">3</div><p class="cover-text">Verifying item details, size, address, and seller before purchase</p></div>
+      <div class="cover-item"><div class="cover-num">4</div><p class="cover-text">Delivering to a convenient location for both of us</p></div>
     </div>
   </div>
 
-  <!-- WHATSAPP TAB -->
   <div id="tab-whatsapp" class="tab-panel">
-    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Copy and send this to potential customers on WhatsApp or social media.</p>
-    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; font-size: 13px; line-height: 1.8; color: var(--color-text-primary); white-space: pre-wrap;" id="wa-text">🛍️ *PERSONAL SHOPPING & DELIVERY SERVICE*
+    <p class="section-label" style="margin-top:40px;">Copy &amp; send to customers</p>
+    <div class="wa-box" id="wa-text">🛍️ *PERSONAL SHOPPING & DELIVERY SERVICE*
 
 Can't shop online? No card? Too busy? — I got you! 💪
 
@@ -95,243 +279,139 @@ I am a third-party personal shopping service. You tell me what you want, I buy i
 📋 All customers must read and agree to our terms before ordering.
 
 DM me to get started! 📩</div>
-    <button onclick="copyWA()" style="font-size: 13px; padding: 8px 16px; border-radius: var(--border-radius-md);" id="copy-btn">Copy message</button>
+    <button class="btn-wa" id="copy-btn" onclick="copyWA()">Copy message</button>
   </div>
 
-  <!-- ORDER FORM TAB -->
   <div id="tab-order" class="tab-panel">
-    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Share this with customers to collect their order details.</p>
-
-    <form id="order-form">
-      <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
-      <input type="hidden" name="access_key" value="c15418e8-d88e-45d4-87db-76b0e46e83c6" />
-      <input type="hidden" name="subject" value="New order received" />
-      <input type="hidden" name="from_name" value="My Shop - Order Form" />
-      <input type="checkbox" name="botcheck" style="display: none;" />
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 16px;">
-        <div class="field-group">
-          <p class="field-label">Full name</p>
-          <input type="text" name="full-name" placeholder="Customer's full name" required />
-        </div>
-        <div class="field-group">
-          <p class="field-label">Phone number</p>
-          <input type="tel" name="phone" placeholder="e.g. 876-XXX-XXXX" required />
-        </div>
+    <p class="section-label" style="margin-top:40px;">Order details</p>
+    <form id="order-form" class="form-card">
+      <input type="hidden" name="access_key" value="c15418e8-d88e-45d4-87db-76b0e46e83c6"/>
+      <input type="hidden" name="subject" value="New order received"/>
+      <input type="hidden" name="from_name" value="My Shop - Order Form"/>
+      <input type="checkbox" name="botcheck" style="display:none;"/>
+      <div class="two-col">
+        <div class="field-group"><label class="field-label">Full name</label><input type="text" name="full-name" placeholder="Your full name" required/></div>
+        <div class="field-group"><label class="field-label">Phone number</label><input type="tel" name="phone" placeholder="876-XXX-XXXX" required/></div>
       </div>
-      <div class="field-group">
-        <p class="field-label">Item name / description</p>
-        <input type="text" name="item-description" placeholder="e.g. Nike Air Force 1 size 10, white" required />
-      </div>
-      <div class="field-group">
-        <p class="field-label">Link to item (if you have one)</p>
-        <input type="text" name="item-link" placeholder="Paste product URL here" />
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 16px;">
-        <div class="field-group">
-          <p class="field-label">Delivery location / area</p>
-          <input type="text" name="delivery-location" placeholder="e.g. Sam Sharpe Square etc..." required />
-        </div>
-      </div>
-      <div class="field-group">
-        <p class="field-label">Any special notes or instructions?</p>
-        <textarea name="special-notes" placeholder="Size, colour, quantity, anything important..."></textarea>
-      </div>
-      <div style="background: #FAEEDA; border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 14px; font-size: 12px; color: #854F0B; line-height: 1.6;">
-        By submitting this order, you confirm you have read and agreed to the customer terms & conditions.
-      </div>
-      <button type="submit" id="order-submit-btn" style="font-size: 13px; padding: 8px 16px; border-radius: var(--border-radius-md);">Submit order</button>
+      <div class="field-group"><label class="field-label">Item name or description</label><input type="text" name="item-description" placeholder="e.g. Nike Air Force 1 size 10, white" required/></div>
+      <div class="field-group"><label class="field-label">Link to item (optional)</label><input type="text" name="item-link" placeholder="Paste product URL here"/></div>
+      <div class="field-group"><label class="field-label">Delivery location or area</label><input type="text" name="delivery-location" placeholder="e.g. Sam Sharpe Square..." required/></div>
+      <div class="field-group"><label class="field-label">Special notes</label><textarea name="special-notes" placeholder="Size, colour, quantity, anything important..."></textarea></div>
+      <div class="form-notice">By submitting, you confirm you have read and agreed to our terms and conditions.</div>
+      <button type="submit" class="btn-primary" id="order-submit-btn">Submit order</button>
     </form>
-
     <div class="confirmed" id="order-confirmed-msg">
-      <div style="width: 48px; height: 48px; border-radius: 50%; background: #9FE1CB; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 22px;">✓</div>
-      <p style="margin: 0 0 4px; font-size: 16px; font-weight: 500; color: #085041;">Order submitted!</p>
-      <p style="margin: 0; font-size: 13px; color: #0F6E56;" id="order-confirmed-name"></p>
+      <div class="check-circle">✓</div>
+      <h3>Order submitted!</h3>
+      <p id="order-confirmed-name"></p>
     </div>
   </div>
 
-  <!-- AGREEMENT TAB -->
   <div id="tab-agreement" class="tab-panel">
+    <p class="section-label" style="margin-top:40px;">Terms &amp; conditions</p>
     <form id="agreement-form">
-      <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
-      <input type="hidden" name="access_key" value="c15418e8-d88e-45d4-87db-76b0e46e83c6" />
-      <input type="hidden" name="subject" value="New customer agreement signed" />
-      <input type="hidden" name="from_name" value="My Shop - Agreement Form" />
-      <input type="checkbox" name="botcheck" style="display: none;" />
-
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1rem;">Customer reads and signs below before any order is placed.</p>
-
-      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">1. Third-party service</strong>We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.</div>
-      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">2. Payment & fees</strong>You are required to pay the full item cost upfront before any order is placed. Our service fee (flat rate + 10% of order total) is separate and is charged for our time, card use, tracking, and delivery. A customs/clearance fee may be communicated once the item arrives in Jamaica — you will be informed before this is due.</div>
-      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">3. Ordering on your behalf</strong>We will verify your item details, size, colour, quantity, and delivery address before purchasing. Once the order is confirmed and placed, changes may not be possible. It is your responsibility to provide accurate information.</div>
-      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">4. Tracking & updates</strong>We will monitor your order and provide updates at key stages. However, we are dependent on the information provided by the seller and shipping company. Delays in updates from those parties are outside our control.</div>
-      <div class="clause" style="border-left: 3px solid #E24B4A; border-radius: 0;"><strong style="font-size: 12px; color: #A32D2D; display: block; margin-bottom: 4px;">5. Liability disclaimer — please read carefully</strong>Once your item has been dispatched by the seller and is in the hands of the shipping or courier company, it is outside our physical control. We are not responsible for items that are lost, damaged, delayed, seized by customs, or tampered with during international or local shipping. We will make every reasonable effort to investigate and assist in resolving any issues, but we cannot guarantee outcomes that are beyond our control as a third-party service. All orders are placed at the customer's own risk.</div>
-      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">6. Dispute resolution</strong>In the event of a missing or damaged item, we will contact the seller and/or shipping company on your behalf and provide you with all tracking and correspondence information. We will do our best to resolve the matter, but final outcomes depend on the policies of those third parties.</div>
-      <div class="clause"><strong style="font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 4px;">7. Agreement</strong>By signing below, you confirm that you have read, understood, and agreed to these terms and conditions. You understand that this is a third-party service and that you are ordering at your own risk.</div>
-
-      <div class="field-group">
-        <p class="field-label">Your full name</p>
-        <input type="text" id="sig-name" name="full-name" placeholder="Type your full name" required />
-      </div>
-      <div class="field-group">
-        <p class="field-label">Your email</p>
-        <input type="email" id="sig-email" name="email" placeholder="you@example.com" />
-      </div>
-      <div class="field-group">
-        <p class="field-label">Draw your signature below</p>
-        <div class="sig-box">
-          <canvas id="sig-canvas" width="580" height="100"></canvas>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-            <span style="font-size: 11px; color: var(--color-text-tertiary);">Draw with finger or mouse</span>
-            <button type="button" onclick="clearSig()" style="font-size: 11px; padding: 4px 10px; border-radius: var(--border-radius-md);">Clear</button>
+      <input type="hidden" name="access_key" value="c15418e8-d88e-45d4-87db-76b0e46e83c6"/>
+      <input type="hidden" name="subject" value="New customer agreement signed"/>
+      <input type="hidden" name="from_name" value="My Shop - Agreement Form"/>
+      <input type="checkbox" name="botcheck" style="display:none;"/>
+      <div class="clause cl-orange"><span class="clause-title">1. Third-party service</span>We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.</div>
+      <div class="clause cl-teal"><span class="clause-title">2. Payment &amp; fees</span>You are required to pay the full item cost upfront before any order is placed. Our service fee (flat rate + 10% of order total) is separate. A customs/clearance fee may be communicated once the item arrives in Jamaica — you will be informed before this is due.</div>
+      <div class="clause cl-blue"><span class="clause-title">3. Ordering on your behalf</span>We will verify your item details, size, colour, quantity, and delivery address before purchasing. Once the order is placed, changes may not be possible. It is your responsibility to provide accurate information.</div>
+      <div class="clause cl-amber"><span class="clause-title">4. Tracking &amp; updates</span>We will monitor your order and provide updates at key stages. Delays from the seller or shipping company are outside our control.</div>
+      <div class="clause cl-red"><span class="clause-title">5. Liability disclaimer — please read carefully</span>Once your item is with the shipping or courier company, it is outside our physical control. We are not responsible for items that are lost, damaged, delayed, seized by customs, or tampered with during shipping. All orders are placed at the customer's own risk.</div>
+      <div class="clause cl-cream"><span class="clause-title">6. Dispute resolution</span>For missing or damaged items, we will contact the seller and/or shipping company on your behalf. Final outcomes depend on the policies of those third parties.</div>
+      <div class="clause cl-orange"><span class="clause-title">7. Agreement</span>By signing below, you confirm that you have read, understood, and agreed to these terms. You understand this is a third-party service and that you are ordering at your own risk.</div>
+      <hr class="divider"/>
+      <div class="form-card" style="margin-bottom:16px;">
+        <div class="two-col">
+          <div class="field-group"><label class="field-label">Your full name</label><input type="text" id="sig-name" name="full-name" placeholder="Type your full name" required/></div>
+          <div class="field-group"><label class="field-label">Your email (optional)</label><input type="email" id="sig-email" name="email" placeholder="you@example.com"/></div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Signature</label>
+          <canvas id="sig-canvas" height="100"></canvas>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+            <span style="font-size:12px;color:var(--muted);">Draw with finger or mouse</span>
+            <button type="button" class="btn-ghost" onclick="clearSig()">Clear</button>
           </div>
         </div>
+        <div class="field-group"><label class="field-label">Date</label><input type="text" id="sig-date" name="date" readonly/></div>
       </div>
-      <div class="field-group">
-        <p class="field-label">Date</p>
-        <input type="text" id="sig-date" name="date" readonly />
-      </div>
-
-      <input type="hidden" name="timestamp" id="sig-timestamp" />
+      <input type="hidden" name="timestamp" id="sig-timestamp"/>
       <textarea name="agreement-summary" id="agreement-summary" hidden></textarea>
-
-      <button type="submit" style="font-size: 13px; padding: 10px 20px; border-radius: var(--border-radius-md); width: 100%;">Confirm & sign agreement</button>
+      <button type="submit" class="btn-primary blue full">Confirm &amp; sign agreement</button>
     </form>
-
     <div class="confirmed" id="confirmed-msg">
-      <div style="width: 48px; height: 48px; border-radius: 50%; background: #9FE1CB; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 22px;">✓</div>
-      <p style="margin: 0 0 4px; font-size: 16px; font-weight: 500; color: #085041;">Agreement signed</p>
-      <p style="margin: 0; font-size: 13px; color: #0F6E56;" id="confirmed-name"></p>
+      <div class="check-circle">✓</div>
+      <h3>Agreement signed</h3>
+      <p id="confirmed-name"></p>
     </div>
   </div>
 
 </div>
 
+<footer>Personal Shopping Service &mdash; Jamaica &bull; All prices in JMD</footer>
+
 <script>
-  function switchTab(name) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    event.target.classList.add('active');
-  }
-
-  function copyWA() {
-    const text = document.getElementById('wa-text').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('copy-btn');
-      btn.textContent = 'Copied!';
-      setTimeout(() => btn.textContent = 'Copy message', 2000);
-    });
-  }
-
-  // --- ORDER FORM (Web3Forms) ---
-  document.getElementById('order-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.querySelector('[name="full-name"]').value.trim();
-    if (!name) { alert('Please enter your full name.'); return; }
-    const btn = document.getElementById('order-submit-btn');
-    btn.textContent = 'Sending...'; btn.disabled = true;
-    try {
-      const obj = Object.fromEntries(new FormData(form));
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(obj)
-      });
-      const json = await res.json();
-      if (res.ok) {
-        form.style.display = 'none';
-        document.getElementById('order-confirmed-msg').style.display = 'block';
-        document.getElementById('order-confirmed-name').textContent = 'Order received for ' + name + '. We\'ll be in touch soon!';
-      } else { throw new Error(json.message || 'Submit failed'); }
-    } catch (err) {
-      alert('Could not submit the order. Please try again.\n' + err.message);
-      btn.textContent = 'Submit order'; btn.disabled = false;
-    }
+function switchTab(btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyWA(){
+  navigator.clipboard.writeText(document.getElementById('wa-text').innerText).then(()=>{
+    const b=document.getElementById('copy-btn');
+    b.textContent='Copied!';setTimeout(()=>b.textContent='Copy message',2000);
   });
-
-  // --- SIGNATURE CANVAS ---
-  const canvas = document.getElementById('sig-canvas');
-  const ctx = canvas.getContext('2d');
-  let drawing = false, hasSig = false;
-
-  function getPos(e) {
-    const r = canvas.getBoundingClientRect();
-    const src = e.touches ? e.touches[0] : e;
-    return { x: src.clientX - r.left, y: src.clientY - r.top };
-  }
-  canvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
-  canvas.addEventListener('mousemove', e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.strokeStyle = '#3C3489'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.stroke(); hasSig = true; });
-  canvas.addEventListener('mouseup', () => drawing = false);
-  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
-  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.strokeStyle = '#3C3489'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.stroke(); hasSig = true; });
-  canvas.addEventListener('touchend', () => drawing = false);
-  function clearSig() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSig = false; }
-
-  const dateInput = document.getElementById('sig-date');
-  if (dateInput) dateInput.value = new Date().toLocaleDateString('en-JM', { year: 'numeric', month: 'long', day: 'numeric' });
-
-  const AGREEMENT_CLAUSES = [
-    ['1. Third-party service', 'We are an independent personal shopping and delivery service. We are not affiliated with, employed by, or representing any online store, courier company, or shipping provider. We act solely as an agent on your behalf.'],
-    ['2. Payment & fees', 'Full item cost is required upfront before any order is placed. Service fee (flat rate + 10% of order total) is separate. A customs/clearance fee may be communicated once the item arrives in Jamaica.'],
-    ['3. Ordering on your behalf', 'We verify item details, size, colour, quantity, and delivery address before purchasing. Once the order is placed, changes may not be possible.'],
-    ['4. Tracking & updates', 'We monitor the order and provide updates at key stages. Delays from sellers or shipping companies are outside our control.'],
-    ['5. Liability disclaimer', 'Once the item is with the shipping or courier company, it is outside our physical control. We are not responsible for items lost, damaged, delayed, seized, or tampered with during shipping. All orders are at the customer\'s own risk.'],
-    ['6. Dispute resolution', 'For missing or damaged items, we will contact the seller and/or shipping company on your behalf. Final outcomes depend on third-party policies.'],
-    ['7. Agreement', 'By signing, the customer confirms they have read, understood, and agreed to these terms and are ordering at their own risk.']
-  ];
-
-  function buildReadableSummary(name, email, date, time, ip) {
-    const lines = [
-      '✅ AGREEMENT CONFIRMED',
-      '='.repeat(40), '',
-      'Full name:  ' + name,
-      'Email:      ' + (email || 'Not provided'),
-      'Date:       ' + date,
-      'Time:       ' + time,
-      'IP Address: ' + (ip || 'Unavailable'),
-      '', 'TERMS ACCEPTED:', '-'.repeat(40)
-    ];
-    AGREEMENT_CLAUSES.forEach(([title]) => lines.push('✔ ' + title));
-    lines.push('', '-'.repeat(40));
-    lines.push('Customer drew a signature on the form and submitted this agreement.');
-    lines.push('This record serves as confirmation of their consent.');
-    return lines.join('\n');
-  }
-
-  // --- AGREEMENT FORM (Web3Forms) ---
-  document.getElementById('agreement-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = document.getElementById('sig-name').value.trim();
-    const email = document.getElementById('sig-email').value.trim();
-    if (!name) { alert('Please enter your full name.'); return; }
-    if (!hasSig) { alert('Please draw your signature.'); return; }
-    const submitBtn = form.querySelector('[type="submit"]');
-    submitBtn.textContent = 'Sending...'; submitBtn.disabled = true;
-    const now = new Date();
-    const time = now.toLocaleTimeString('en-JM', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('sig-timestamp').value = dateInput.value + ' at ' + time;
-    let ip = 'Unavailable';
-    try { const r = await fetch('https://api.ipify.org?format=json'); const d = await r.json(); ip = d.ip; } catch(_) {}
-    document.getElementById('agreement-summary').value = buildReadableSummary(name, email, dateInput.value, time, ip);
-    try {
-      const obj = Object.fromEntries(new FormData(form));
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(obj)
-      });
-      const json = await res.json();
-      if (res.ok) {
-        form.style.display = 'none';
-        document.getElementById('confirmed-msg').style.display = 'block';
-        document.getElementById('confirmed-name').textContent = name + ' agreed on ' + dateInput.value;
-      } else { throw new Error(json.message || 'Submit failed'); }
-    } catch (err) {
-      alert('Could not submit the agreement. Please try again.\n' + err.message);
-      submitBtn.textContent = 'Confirm & sign agreement'; submitBtn.disabled = false;
-    }
-  });
+}
+document.getElementById('order-form').addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const form=e.target,name=form.querySelector('[name="full-name"]').value.trim();
+  if(!name){alert('Please enter your full name.');return;}
+  const btn=document.getElementById('order-submit-btn');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});
+    const json=await res.json();
+    if(res.ok){form.style.display='none';document.getElementById('order-confirmed-msg').style.display='block';document.getElementById('order-confirmed-name').textContent='Order received for '+name+'. We\'ll be in touch soon!';}
+    else throw new Error(json.message||'Submit failed');
+  }catch(err){alert('Could not submit. Please try again.\n'+err.message);btn.textContent='Submit order';btn.disabled=false;}
+});
+const canvas=document.getElementById('sig-canvas'),ctx=canvas.getContext('2d');
+let drawing=false,hasSig=false;
+function getPos(e){const r=canvas.getBoundingClientRect(),s=e.touches?e.touches[0]:e;return{x:(s.clientX-r.left)*(canvas.width/r.width),y:(s.clientY-r.top)*(canvas.height/r.height)};}
+canvas.addEventListener('mousedown',e=>{drawing=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.strokeStyle='#8B2E00';ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke();hasSig=true;});
+canvas.addEventListener('mouseup',()=>drawing=false);
+canvas.addEventListener('mouseleave',()=>drawing=false);
+canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.strokeStyle='#8B2E00';ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke();hasSig=true;});
+canvas.addEventListener('touchend',()=>drawing=false);
+function clearSig(){ctx.clearRect(0,0,canvas.width,canvas.height);hasSig=false;}
+const di=document.getElementById('sig-date');
+if(di)di.value=new Date().toLocaleDateString('en-JM',{year:'numeric',month:'long',day:'numeric'});
+const CLAUSES=[['1. Third-party service','Independent personal shopping service.'],['2. Payment & fees','Full item cost upfront. Flat rate + 10% fee.'],['3. Ordering on your behalf','Details verified before purchase.'],['4. Tracking & updates','Updates at key stages.'],['5. Liability disclaimer','Not responsible once item is with carrier.'],['6. Dispute resolution','Will contact seller/carrier on your behalf.'],['7. Agreement','Customer agrees to all terms.']];
+function buildSummary(n,em,d,t,ip){const l=['AGREEMENT CONFIRMED','='.repeat(40),'','Full name:  '+n,'Email:      '+(em||'Not provided'),'Date:       '+d,'Time:       '+t,'IP:         '+(ip||'Unavailable'),'','TERMS ACCEPTED:','-'.repeat(40)];CLAUSES.forEach(([x])=>l.push('✔ '+x));l.push('','Customer drew a signature and submitted.');return l.join('\n');}
+document.getElementById('agreement-form').addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const form=e.target,name=document.getElementById('sig-name').value.trim(),email=document.getElementById('sig-email').value.trim();
+  if(!name){alert('Please enter your full name.');return;}
+  if(!hasSig){alert('Please draw your signature.');return;}
+  const sb=form.querySelector('[type="submit"]');sb.textContent='Sending…';sb.disabled=true;
+  const now=new Date(),time=now.toLocaleTimeString('en-JM',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('sig-timestamp').value=di.value+' at '+time;
+  let ip='Unavailable';
+  try{const r=await fetch('https://api.ipify.org?format=json');const d=await r.json();ip=d.ip;}catch(_){}
+  document.getElementById('agreement-summary').value=buildSummary(name,email,di.value,time,ip);
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});
+    const json=await res.json();
+    if(res.ok){form.style.display='none';document.getElementById('confirmed-msg').style.display='block';document.getElementById('confirmed-name').textContent=name+' agreed on '+di.value;}
+    else throw new Error(json.message||'Submit failed');
+  }catch(err){alert('Could not submit. Please try again.\n'+err.message);sb.textContent='Confirm & sign agreement';sb.disabled=false;}
+});
 </script>
+</body>
+</html>
