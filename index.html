@@ -104,7 +104,7 @@ DM me to get started! 📩</div>
 
     <form id="order-form">
       <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <input type="hidden" name="access_key" value="c15418e8-d88e-45d4-87db-76b0e46e83c6" />
       <input type="hidden" name="subject" value="New order received" />
       <input type="hidden" name="from_name" value="My Shop - Order Form" />
       <input type="checkbox" name="botcheck" style="display: none;" />
@@ -154,7 +154,7 @@ DM me to get started! 📩</div>
   <div id="tab-agreement" class="tab-panel">
     <form id="agreement-form">
       <!-- Web3Forms: replace YOUR_ACCESS_KEY_HERE with your key from web3forms.com -->
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+      <input type="hidden" name="access_key" value="c15418e8-d88e-45d4-87db-76b0e46e83c6" />
       <input type="hidden" name="subject" value="New customer agreement signed" />
       <input type="hidden" name="from_name" value="My Shop - Agreement Form" />
       <input type="checkbox" name="botcheck" style="display: none;" />
@@ -192,7 +192,7 @@ DM me to get started! 📩</div>
         <input type="text" id="sig-date" name="date" readonly />
       </div>
 
-      <input type="hidden" name="signature-image" id="sig-image" />
+      <input type="hidden" name="timestamp" id="sig-timestamp" />
       <textarea name="agreement-summary" id="agreement-summary" hidden></textarea>
 
       <button type="submit" style="font-size: 13px; padding: 10px 20px; border-radius: var(--border-radius-md); width: 100%;">Confirm & sign agreement</button>
@@ -282,12 +282,21 @@ DM me to get started! 📩</div>
     ['7. Agreement', 'By signing, the customer confirms they have read, understood, and agreed to these terms and are ordering at their own risk.']
   ];
 
-  function buildReadableSummary(name, email, date) {
-    const lines = ['CUSTOMER AGREEMENT — SIGNED', '='.repeat(40), '', 'Full name: ' + name];
-    if (email) lines.push('Email: ' + email);
-    lines.push('Date signed: ' + date, '', 'TERMS ACCEPTED:', '-'.repeat(40));
-    AGREEMENT_CLAUSES.forEach(([title, body]) => lines.push('', title, body));
-    lines.push('', '-'.repeat(40), 'Signature captured as image.');
+  function buildReadableSummary(name, email, date, time, ip) {
+    const lines = [
+      '✅ AGREEMENT CONFIRMED',
+      '='.repeat(40), '',
+      'Full name:  ' + name,
+      'Email:      ' + (email || 'Not provided'),
+      'Date:       ' + date,
+      'Time:       ' + time,
+      'IP Address: ' + (ip || 'Unavailable'),
+      '', 'TERMS ACCEPTED:', '-'.repeat(40)
+    ];
+    AGREEMENT_CLAUSES.forEach(([title]) => lines.push('✔ ' + title));
+    lines.push('', '-'.repeat(40));
+    lines.push('Customer drew a signature on the form and submitted this agreement.');
+    lines.push('This record serves as confirmation of their consent.');
     return lines.join('\n');
   }
 
@@ -301,8 +310,12 @@ DM me to get started! 📩</div>
     if (!hasSig) { alert('Please draw your signature.'); return; }
     const submitBtn = form.querySelector('[type="submit"]');
     submitBtn.textContent = 'Sending...'; submitBtn.disabled = true;
-    document.getElementById('sig-image').value = canvas.toDataURL('image/png');
-    document.getElementById('agreement-summary').value = buildReadableSummary(name, email, dateInput.value);
+    const now = new Date();
+    const time = now.toLocaleTimeString('en-JM', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('sig-timestamp').value = dateInput.value + ' at ' + time;
+    let ip = 'Unavailable';
+    try { const r = await fetch('https://api.ipify.org?format=json'); const d = await r.json(); ip = d.ip; } catch(_) {}
+    document.getElementById('agreement-summary').value = buildReadableSummary(name, email, dateInput.value, time, ip);
     try {
       const obj = Object.fromEntries(new FormData(form));
       const res = await fetch('https://api.web3forms.com/submit', {
